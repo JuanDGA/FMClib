@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h> // Added for free()
 #include "FMClib/utils/utils.h"
 #include "FMClib/fmc.h"
 
@@ -23,7 +24,11 @@ int main() {
 
     char * cifrado = cifrar_afin(clave_afin, a_cifrar, ALFABETO);
 
-    printf("%s\n", cifrado);
+    if (cifrado != NULL) { // Good practice to check before using/freeing
+        printf("%s\n", cifrado);
+        free(cifrado); // Free the allocated memory
+        cifrado = NULL; // Optional: prevent dangling pointer use
+    }
 
     return 0;
 }
